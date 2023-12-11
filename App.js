@@ -8,7 +8,7 @@ import RegisterScreen from './RegisterScreen';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableOpacity } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Ionicons } from '@expo/vector-icons'; // Ensure @expo/vector-icons is installed
+import { Ionicons } from '@expo/vector-icons'; 
 import SearchScreen from './SearchScreen';
 import HomeScreen from './HomeScreen';
 
@@ -96,8 +96,7 @@ const MainTabs = () => (
   </Tab.Navigator>
 );
 
-// Root Stack Navigator
-// Root Stack Navigator
+
 const RootStackScreen = () => {
   return (
     <RootStack.Navigator screenOptions={{ headerShown: false }}>
@@ -107,7 +106,7 @@ const RootStackScreen = () => {
         component={RegisterScreen} 
         options={({ navigation }) => ({ 
           presentation: 'modal',
-          gestureEnabled: 'true',
+          gestureEnabled: true,
           headerShown: true,
           headerTitle: 'Register',
           headerBackTitle: '',
