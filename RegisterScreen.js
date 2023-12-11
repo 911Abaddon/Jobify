@@ -95,9 +95,11 @@ const NameScreen = ({ navigation, route }) => {
   );
 };
 
+
 const BirthdayScreen = ({ navigation, route }) => {
   const [date, setDate] = useState(new Date());
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [formattedDate, setFormattedDate] = useState('');
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -109,6 +111,7 @@ const BirthdayScreen = ({ navigation, route }) => {
 
   const handleConfirm = (pickedDate) => {
     setDate(pickedDate);
+    setFormattedDate(pickedDate.toLocaleDateString());
     hideDatePicker();
   };
 
@@ -121,7 +124,7 @@ const BirthdayScreen = ({ navigation, route }) => {
       lastName: route.params.lastName,
       birthday: date.toISOString(),
     };
-  
+
     // Change the ip with your local device ip
     fetch('http://172.20.10.6:3000/register', {
       method: 'POST',
@@ -133,23 +136,26 @@ const BirthdayScreen = ({ navigation, route }) => {
       .then(response => response.json())
       .then(data => {
         console.log('Registration Success:', data);
-      
         navigation.navigate('HomeScreen'); 
       })
       .catch((error) => {
         console.error('Registration Error:', error);
-      
       });
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.additionalHeaderText}>Please enter your birthday</Text>
-      
+
       <TouchableOpacity style={styles.dateContainer} onPress={showDatePicker}>
-        <Text style={styles.dateText}>{date.toLocaleDateString()}</Text>
+        <TextInput
+          style={styles.dateText}
+          placeholder="Select Date"
+          value={formattedDate}
+          editable={false}
+        />
       </TouchableOpacity>
-      
+
       <DateTimePickerModal
         isVisible={isDatePickerVisible}
         mode="date"
