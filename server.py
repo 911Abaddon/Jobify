@@ -41,9 +41,10 @@ def register_user():
     if conn is not None:
         c = conn.cursor()
         c.execute('''INSERT INTO users (email, password, phone_number, name, last_name, birthday) 
-                     VALUES (?, ?, ?, ?, ?, ?)''', 
-                     (data['email'], data['password'], data['phoneNumber'], 
-                      data['name'], data['lastName'], data['birthday']))
+             VALUES (?, ?, ?, ?, ?, ?)''', 
+             (data['email'], data['password'], data['phoneNumber'], 
+              data['name'], data['lastName'], str(data['birthday'])))
+
         conn.commit()
         conn.close()
         return jsonify({'status': 'success'})
